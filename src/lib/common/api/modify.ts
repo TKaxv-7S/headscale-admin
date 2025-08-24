@@ -29,6 +29,21 @@ export async function renameNode(n: Node, nameNew: string): Promise<Node> {
 	return node;
 }
 
+export async function changeIp(n: Node, ipNew: number): Promise<Node> {
+	let ipApi = "";
+	if (ipNew == 0) {
+		ipApi = "changeipv4addresses";
+	} else if (ipNew == 1) {
+		ipApi = "changeipv6addresses";
+	} else {
+		return n;
+	}
+	const path = `${API_URL_NODE}/${n.id}/${ipApi}`;
+	const { node } = await apiPost<ApiNode>(path, {new_ip_addresses: n.ipAddresses[ipNew]});
+	debug('ChangeIp Node from to "' + n.ipAddresses[ipNew] + '"');
+	return node;
+}
+
 export async function changeNodeOwner(n: Node, newUserID: string): Promise<Node> {
 	const path = `${API_URL_NODE}/${n.id}/user`;
 	const { node } = await apiPost<ApiNode>(path, {user: newUserID});
