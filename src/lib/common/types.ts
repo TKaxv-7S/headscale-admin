@@ -142,14 +142,12 @@ export type Node = {
 	| 'REGISTER_METHOD_AUTH_KEY'
 	| 'REGISTER_METHOD_CLI'
 	| 'REGISTER_METHOD_OIDC';
-	forcedTags: string[];
-	invalidTags: string[];
-	validTags: string[];
 	givenName: string;
 	online: boolean;
 	approvedRoutes: string[];
 	availableRoutes: string[];
 	subnetRoutes: string[];
+	tags: string[];
 };
 
 export type ApiNodes = {
